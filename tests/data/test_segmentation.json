@@ -1,0 +1,18 @@
+{
+    "header": [
+      "segment", 
+      "#"
+    ], 
+    "name": "test_segmentation", 
+    "rows": [
+      [
+        "already_bought", 
+        0
+      ], 
+      [
+        "not_bought", 
+        4
+      ]
+    ], 
+    "success": true
+}

@@ -1,0 +1,18 @@
+{
+    "data": [
+      {
+        "catalog_id": "5b69de5bc0basdfsdf0b5", 
+        "item_id": "1", 
+        "properties": {
+          "one": "foo", 
+          "two": "bar"
+        }
+      }
+    ], 
+    "limit": 20, 
+    "matched": 1, 
+    "matched_limited": false, 
+    "skip": 0, 
+    "success": true, 
+    "total": 1
+  }

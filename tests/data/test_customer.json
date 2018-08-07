@@ -1,0 +1,19 @@
+{
+    "ids":{
+       "registered":"test"
+    },
+    "properties":{
+       "first_name":"Lukas",
+       "last_name":"Cerny"
+    },
+    "success":true,
+    "events":[
+       {
+          "properties":{
+            "foo": "bar"
+          },
+          "timestamp":1533495544.343536,
+          "type":"test"
+       }
+    ]
+ }

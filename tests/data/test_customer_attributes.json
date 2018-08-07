@@ -1,0 +1,22 @@
+{
+    "results": [
+      {
+        "success": true, 
+        "value": "Lukas"
+      }, 
+      {
+        "success": true, 
+        "value": "not_bought"
+      }, 
+      {
+        "success": true, 
+        "value": ["123"]
+      }, 
+      {
+        "success": true, 
+        "value": 0
+      }
+    ], 
+    "success": true
+  }
+  

@@ -1,0 +1,18 @@
+{
+    "header": [
+        "cookie id", 
+        "count(customer)"
+    ], 
+    "name": "test_report", 
+    "rows": [
+        [
+        "test1", 
+        1
+        ], 
+        [
+        "test2", 
+        2
+        ]
+    ], 
+    "success": true
+}

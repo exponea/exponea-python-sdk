@@ -1,0 +1,24 @@
+{
+    "header": [
+       "serie",
+       "step 1 first_session count",
+       "step 2 session_start count",
+       "step 2 session_start duration from previous"
+    ],
+    "name": "test_funnel",
+    "rows":[
+        [
+            "Total",
+            2,
+            1,
+            435764.1615576744
+        ],
+        [
+            "Foo",
+            1,
+            1,
+            435764.1615576744
+        ]
+    ],
+    "success":true
+}
