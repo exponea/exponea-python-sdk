@@ -54,10 +54,10 @@ For official Exponea documenation of Data API please see <https://developers.exp
 ```python
 exponea.Catalog.create_catalog("catalog_name", ["field_one", "field_two"])
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| catalog_name  | String        | Yes      |
-| fields        | Array<String> | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| catalog_name  | `String`        | Yes      |
+| fields        | `Array<String>` | Yes      |
 
 It returns ID of the catalog as a String.
 ```python
@@ -68,9 +68,9 @@ d2b69e7s987b0asa0137455f2
 ```python
 exponea.Catalog.get_catalog_name("catalog_id")
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| catalog_id    | String        | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| catalog_id    | `String`        | Yes      |
 
 It returns name of the catalog as a String.
 ```python
@@ -81,10 +81,11 @@ test_catalog
 ```python
 exponea.Catalog.get_catalog_items("catalog_id", params={})
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| catalog_id    | String        | Yes      |
-| params        | Dictionary    | No       |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| catalog_id    | `String`        | Yes      |
+| params        | `Dictionary`    | No       |
+
 _Note: params is a kwargs argument._
 It returns items of the catalog that match the query and filters specified in params Dictionary. See [official documentation](https://developers.exponea.com/v2/reference#get-catalog-items) for what kind of options you can give to params Dictionary.
 ```python
@@ -102,11 +103,12 @@ It returns items of the catalog that match the query and filters specified in pa
 ```python
 exponea.Catalog.update_catalog_item("catalog_id", "1", {"field_one": "new_value"})
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| catalog_id    | String        | Yes      |
-| item_id       | String        | Yes      |
-| properties    | String        | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| catalog_id    | `String`        | Yes      |
+| item_id       | `String`        | Yes      |
+| properties    | `String`        | Yes      |
+
 It returns Boolean of whether the operation was successful.
 ```python
 True
@@ -116,11 +118,12 @@ True
 ```python
 exponea.Catalog.update_catalog_name("catalog_id", "new_name", ["fiel_one", "field_two", "field_three"])
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| catalog_id    | String        | Yes      |
-| new_name      | String        | Yes      |
-| fields        | Array<String> | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| catalog_id    | `String`        | Yes      |
+| new_name      | `String`        | Yes      |
+| fields        | `Array<String>` | Yes      |
+
 _Note: fields must contain those fields that already exist._
 It returns Boolean of whether the operation was successful.
 ```python
@@ -131,11 +134,12 @@ True
 ```python
 exponea.Catalog.create_catalog_item("catalog_id", "item_id", { "field_one": "value_one" })
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| catalog_id    | String        | Yes      |
-| item_id       | String        | Yes      |
-| properties    | Dictionary    | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| catalog_id    | `String`        | Yes      |
+| item_id       | `String`        | Yes      |
+| properties    | `Dictionary`    | Yes      |
+
 _Note: This operation replaces an already existing item if the IDs match._
 It returns Boolean of whether the operation was successful.
 ```python
@@ -146,11 +150,12 @@ True
 ```python
 exponea.Catalog.update_catalog_item("catalog_id", "item_id", { "field_one": "value_one" })
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| catalog_id    | String        | Yes      |
-| item_id       | String        | Yes      |
-| properties    | Dictionary    | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| catalog_id    | `String`        | Yes      |
+| item_id       | `String`        | Yes      |
+| properties    | `Dictionary`    | Yes      |
+
 _Note: Updates only those fields that are specified in properties Dictionary._
 It returns Boolean of whether the operation was successful.
 ```python
@@ -162,10 +167,11 @@ True
 ```python
 exponea.Catalog.delete_catalog_item("catalog_id", "item_id")
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| catalog_id    | String        | Yes      |
-| item_id       | String        | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| catalog_id    | `String`        | Yes      |
+| item_id       | `String`        | Yes      |
+
 It returns Boolean of whether the operation was successful.
 ```python
 True
@@ -175,9 +181,10 @@ True
 ```python
 exponea.Catalog.delete_catalog_items("catalog_id")
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| catalog_id    | String        | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| catalog_id    | `String`        | Yes      |
+
 It returns Boolean of whether the operation was successful.
 ```python
 True
@@ -187,9 +194,10 @@ True
 ```python
 exponea.Catalog.delete_catalog("catalog_id")
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| catalog_id    | String        | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| catalog_id    | `String`        | Yes      |
+
 It returns Boolean of whether the operation was successful.
 ```python
 True
@@ -203,6 +211,7 @@ exponea.Tracking.get_system_time()
 ```
 | Parameter     | Type          | Required |
 | ------------- | ------------- | -------- |
+
 It returns a Float.
 ```python
 1533663283.8943756
@@ -212,10 +221,11 @@ It returns a Float.
 ```python
 exponea.Tracking.update_customer_properties({ "registered": "test" }, { "first_name": "Lukas" })
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| customer_ids  | Dictionary    | Yes      |
-| properties    | Dictionary    | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| customer_ids  | `Dictionary`    | Yes      |
+| properties    | `Dictionary`    | Yes      |
+
 _Note: The Customer's properties will get updated with the values of the properties Dictionary._
 It returns Boolean describing whether operation was successful or not.
 ```python
@@ -226,12 +236,13 @@ True
 ```python
 exponea.Tracking.add_event({ "registered": "test" }, "event_type", properties={ "property": "sample_property" }, timestamp=1533663283)
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| customer_ids  | Dictionary    | Yes      |
-| event_type    | String        | Yes      |
-| properties    | Dictionary    | No       |
-| timestamp     | Float         | No       |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| customer_ids  | `Dictionary`    | Yes      |
+| event_type    | `String`        | Yes      |
+| properties    | `Dictionary`    | No       |
+| timestamp     | `Float`         | No       |
+
 _Note: properties and timestamp are kwargs._
 It returns Boolean describing whether operation was successful or not.
 ```python
@@ -257,9 +268,10 @@ exponea.Tracking.batch_commands([
     }
 ])
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| commands      | Array<Dictionary> | Yes      |
+| Parameter     | Type                | Required |
+| ------------- | -------------       | -------- |
+| commands      | `Array<Dictionary>` | Yes      |
+
 See [official documentation](https://developers.exponea.com/v2/reference#section-how-to-build-a-command-body) for the available formats of different types of commands.
 It returns Boolean describing whether operation was successful or not.
 ```python
@@ -272,11 +284,12 @@ True
 ```python
 exponea.Customer.get_customer({ "registered": "test", "cookie": "123" })
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| customer_ids  | Dictionary    | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| customer_ids  | `Dictionary`    | Yes      |
+
 _Note: The keys of the Dictionary are the names of the ID type, and value is the value for a given customer._
-It returns following Dictionary.
+It returns a Dictionary.
 ```python
 {
     "events": [{
@@ -299,11 +312,12 @@ It returns following Dictionary.
 ```python
 exponea.Customer.get_customer_consents({"registered": "test"}, [ "newsletter", "other" ])
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| customer_ids  | Dictionary    | Yes      |
-| consent_types | Array<String> | Yes      |
-It returns following Dictionary.
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| customer_ids  | `Dictionary`    | Yes      |
+| consent_types | `Array<String>` | Yes      |
+
+It returns a Dictionary.
 ```python
 {
     "newsletter": True,
@@ -315,18 +329,19 @@ It returns following Dictionary.
 ```python
 exponea.Customer.get_customer_attributes({"registered": "test"}, ids=["cookie", "ga"], properties=["first_name"], aggregations=["agg_id"], segmentations=["segm_id"], predictions=["pred_id"], expressions=["expr_id"])
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| customer_ids  | Dictionary    | Yes      |
-| ids           | Array<String> | No       |
-| properties    | Array<String> | No       |
-| aggregations  | Array<String> | No       |
-| expressions   | Array<String> | No       |
-| segmentations | Array<String> | No       |
-| predictions   | Array<String> | No       |
-| expressions   | Array<String> | No       |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| customer_ids  | `Dictionary`    | Yes      |
+| ids           | `Array<String>` | No       |
+| properties    | `Array<String>` | No       |
+| aggregations  | `Array<String>` | No       |
+| expressions   | `Array<String>` | No       |
+| segmentations | `Array<String>` | No       |
+| predictions   | `Array<String>` | No       |
+| expressions   | `Array<String>` | No       |
+
 _Note: The paramateres are kwargs and specify the attributes you want to recieve._
-It returns following Dictionary.
+It returns a Dictionary.
 ```python
 {
     "ids": {
@@ -359,7 +374,7 @@ exponea.Customer.get_customers()
 | Parameter     | Type          | Required |
 | ------------- | ------------- | -------- |
 
-It returns following Dictionary.
+It returns an Array.
 ```python
 [
     {
@@ -379,12 +394,13 @@ It returns following Dictionary.
 ```python
 exponea.Customer.get_events({ "registered": "test" }, [ "event_type" ])
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| customer_ids  | Dictionary    | Yes      |
-| event_types   | Array<String> | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| customer_ids  | `Dictionary`    | Yes      |
+| event_types   | `Array<String>` | Yes      |
+
 _Note: Event type is the name of an Event._
-It returns following Dictionary.
+It returns an Array.
 ```python
 [
     {
@@ -401,9 +417,10 @@ It returns following Dictionary.
 ```python
 exponea.Customer.anonymize_customer({ "registered": "test" })
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| customer_ids  | Dictionary    | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| customer_ids  | `Dictionary`    | Yes      |
+
 It returns a Boolean if operation was successful or not.
 ```python
 True
@@ -415,11 +432,11 @@ True
 ```python
 exponea.Analyses.get_report("report_id")
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| report_id     | String        | Yes      |
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| report_id     | `String`        | Yes      |
 
-It returns following Dictionary. The elements in `data` represent individual rows.
+It returns a Dictionary. The elements in `data` represent individual rows.
 ```python
 {
     "name": "report_name",
@@ -436,10 +453,11 @@ It returns following Dictionary. The elements in `data` represent individual row
 ```python
 exponea.Analyses.get_funnel("funnel_id")
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| funnel_id     | String        | Yes      |
-It returns following Dictionary. The elements in `data` represent individual drill downs.
+| Parameter     | Type            | Required |
+| ------------- | -------------   | -------- |
+| funnel_id     | `String`        | Yes      |
+
+It returns a Dictionary. The elements in `data` represent individual drill downs.
 ```python
 {
     "name": "funnel_name",
@@ -458,10 +476,11 @@ It returns following Dictionary. The elements in `data` represent individual dri
 ```python
 exponea.Analyses.get_segmentation("segmentation_id")
 ```
-| Parameter     | Type          | Required |
-| ------------- | ------------- | -------- |
-| segmentation_id | String        | Yes      |
-It returns following Dictionary. The elements in `data` represent individual segments.
+| Parameter     | Type              | Required |
+| ------------- | -------------     | -------- |
+| segmentation_id | `String`        | Yes      |
+
+It returns a Dictionary. The elements in `data` represent individual segments.
 ```python
 {
     "name": "segmentation_name",
