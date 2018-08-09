@@ -87,6 +87,7 @@ exponea.Catalog.get_catalog_items("catalog_id", params={})
 | params        | `Dictionary`    | No       |
 
 _Note: params is a kwargs argument._
+
 It returns items of the catalog that match the query and filters specified in params Dictionary. See [official documentation](https://developers.exponea.com/v2/reference#get-catalog-items) for what kind of options you can give to params Dictionary.
 ```python
 {
@@ -125,6 +126,7 @@ exponea.Catalog.update_catalog_name("catalog_id", "new_name", ["fiel_one", "fiel
 | fields        | `Array<String>` | Yes      |
 
 _Note: fields must contain those fields that already exist._
+
 It returns Boolean of whether the operation was successful.
 ```python
 True
@@ -141,6 +143,7 @@ exponea.Catalog.create_catalog_item("catalog_id", "item_id", { "field_one": "val
 | properties    | `Dictionary`    | Yes      |
 
 _Note: This operation replaces an already existing item if the IDs match._
+
 It returns Boolean of whether the operation was successful.
 ```python
 True
@@ -157,6 +160,7 @@ exponea.Catalog.update_catalog_item("catalog_id", "item_id", { "field_one": "val
 | properties    | `Dictionary`    | Yes      |
 
 _Note: Updates only those fields that are specified in properties Dictionary._
+
 It returns Boolean of whether the operation was successful.
 ```python
 True
@@ -207,10 +211,13 @@ True
 
 ### get_system_time
 ```python
-exponea.Tracking.get_system_time()
+exponea.Tracking.get_system_time(batch=False)
 ```
 | Parameter     | Type          | Required |
 | ------------- | ------------- | -------- |
+| batch         | `Boolean`     | No       |
+
+_Note: The batch kwarg specifies whether command is used in the batch mode. See [batch_commands method](#batch_commands) for details._
 
 It returns a Float.
 ```python
@@ -219,14 +226,18 @@ It returns a Float.
 
 ### update_customer_properties
 ```python
-exponea.Tracking.update_customer_properties({ "registered": "test" }, { "first_name": "Lukas" })
+exponea.Tracking.update_customer_properties({ "registered": "test" }, { "first_name": "Lukas" }, batch=False)
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
 | customer_ids  | `Dictionary`    | Yes      |
 | properties    | `Dictionary`    | Yes      |
+| batch         | `Boolean`       | No       |
 
 _Note: The Customer's properties will get updated with the values of the properties Dictionary._
+
+_Note: The batch kwarg specifies whether command is used in the batch mode. See [batch_commands method](#batch_commands) for details._
+
 It returns Boolean describing whether operation was successful or not.
 ```python
 True
@@ -234,7 +245,7 @@ True
 
 ### add_event
 ```python
-exponea.Tracking.add_event({ "registered": "test" }, "event_type", properties={ "property": "sample_property" }, timestamp=1533663283)
+exponea.Tracking.add_event({ "registered": "test" }, "event_type", properties={ "property": "sample_property" }, timestamp=1533663283, batch=False)
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -242,8 +253,12 @@ exponea.Tracking.add_event({ "registered": "test" }, "event_type", properties={ 
 | event_type    | `String`        | Yes      |
 | properties    | `Dictionary`    | No       |
 | timestamp     | `Float`         | No       |
+| batch         | `Boolean`       | No       |
 
 _Note: properties and timestamp are kwargs._
+
+_Note: The batch kwarg specifies whether command is used in the batch mode. See [batch_commands method](#batch_commands) for details._
+
 It returns Boolean describing whether operation was successful or not.
 ```python
 True
@@ -252,20 +267,9 @@ True
 ### batch_commands
 ```python
 exponea.Tracking.batch_commands([
-    {
-        "name": "system/time"
-    }, {
-        "name": "customers",
-        "data": {
-            "customer_ids": {
-                "registered": "test"
-            },
-            "properties": {
-                "first_name": "Lukas",
-                "last_name": "Cerny"
-            }
-        }
-    }
+    exponea.Tracking.add_event({ "registered": "test" }, "event_type", properties={ "property": "test" }, batch=True),
+    exponea.Tracking.update_customer_properties({ "registered": "test" }, { "first_name": "Lukas" }, batch=True),
+    exponea.Tracking.get_system_time(batch=True)
 ])
 ```
 | Parameter     | Type                | Required |
@@ -273,9 +277,9 @@ exponea.Tracking.batch_commands([
 | commands      | `Array<Dictionary>` | Yes      |
 
 See [official documentation](https://developers.exponea.com/v2/reference#section-how-to-build-a-command-body) for the available formats of different types of commands.
-It returns Boolean describing whether operation was successful or not.
+It returns an Array of Booleans describing whether each operation was successful or not.
 ```python
-True
+[True, True, 1533833512.6860783]
 ```
 
 ## Customer API
@@ -289,6 +293,7 @@ exponea.Customer.get_customer({ "registered": "test", "cookie": "123" })
 | customer_ids  | `Dictionary`    | Yes      |
 
 _Note: The keys of the Dictionary are the names of the ID type, and value is the value for a given customer._
+
 It returns a Dictionary.
 ```python
 {
@@ -341,6 +346,7 @@ exponea.Customer.get_customer_attributes({"registered": "test"}, ids=["cookie", 
 | expressions   | `Array<String>` | No       |
 
 _Note: The paramateres are kwargs and specify the attributes you want to recieve._
+
 It returns a Dictionary.
 ```python
 {
@@ -400,6 +406,7 @@ exponea.Customer.get_events({ "registered": "test" }, [ "event_type" ])
 | event_types   | `Array<String>` | Yes      |
 
 _Note: Event type is the name of an Event._
+
 It returns an Array.
 ```python
 [

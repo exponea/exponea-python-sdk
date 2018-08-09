@@ -24,7 +24,13 @@ def test_add_event(mocker, load_data, mock_request):
 
 def test_batch_commands(mocker, load_data, mock_request):
     exponea = Exponea("test")
-    mock_exponea_response = load_data("test_tracking.json")
+    mock_exponea_response = load_data("test_batch_command.json")
     mocker.patch("requests.request", mock_request(mock_exponea_response))
-    response = exponea.Tracking.batch_commands({ "registered": "foo" })
-    assert response == True
+    response = exponea.Tracking.batch_commands([
+        exponea.Tracking.add_event({ "registered": "test" }, "test", batch=True),
+        exponea.Tracking.update_customer_properties({ "registered": "test" }, { "first_name": "test" }, batch=True),
+        exponea.Tracking.get_system_time(batch=True)
+    ])
+    assert response[0] == True
+    assert response[1] == True
+    assert response[2] == 1533833360.2316685
