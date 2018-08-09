@@ -60,6 +60,7 @@ exponea.Catalog.create_catalog("catalog_name", ["field_one", "field_two"])
 | fields        | `Array<String>` | Yes      |
 
 It returns ID of the catalog as a String.
+
 ```python
 d2b69e7s987b0asa0137455f2
 ```
@@ -73,6 +74,7 @@ exponea.Catalog.get_catalog_name("catalog_id")
 | catalog_id    | `String`        | Yes      |
 
 It returns name of the catalog as a String.
+
 ```python
 test_catalog
 ```
@@ -86,9 +88,10 @@ exponea.Catalog.get_catalog_items("catalog_id", params={})
 | catalog_id    | `String`        | Yes      |
 | params        | `Dictionary`    | No       |
 
-_Note: params is a kwargs argument._
+_Note: `params` is a kwargs argument._
 
 It returns items of the catalog that match the query and filters specified in params Dictionary. See [official documentation](https://developers.exponea.com/v2/reference#get-catalog-items) for what kind of options you can give to params Dictionary.
+
 ```python
 {
     "matched": 2,
@@ -111,6 +114,7 @@ exponea.Catalog.update_catalog_item("catalog_id", "1", {"field_one": "new_value"
 | properties    | `String`        | Yes      |
 
 It returns Boolean of whether the operation was successful.
+
 ```python
 True
 ```
@@ -125,9 +129,10 @@ exponea.Catalog.update_catalog_name("catalog_id", "new_name", ["fiel_one", "fiel
 | new_name      | `String`        | Yes      |
 | fields        | `Array<String>` | Yes      |
 
-_Note: fields must contain those fields that already exist._
+_Note: `fields` must contain those fields that already exist._
 
 It returns Boolean of whether the operation was successful.
+
 ```python
 True
 ```
@@ -177,6 +182,7 @@ exponea.Catalog.delete_catalog_item("catalog_id", "item_id")
 | item_id       | `String`        | Yes      |
 
 It returns Boolean of whether the operation was successful.
+
 ```python
 True
 ```
@@ -190,6 +196,7 @@ exponea.Catalog.delete_catalog_items("catalog_id")
 | catalog_id    | `String`        | Yes      |
 
 It returns Boolean of whether the operation was successful.
+
 ```python
 True
 ```
@@ -203,6 +210,7 @@ exponea.Catalog.delete_catalog("catalog_id")
 | catalog_id    | `String`        | Yes      |
 
 It returns Boolean of whether the operation was successful.
+
 ```python
 True
 ```
@@ -217,7 +225,7 @@ exponea.Tracking.get_system_time(batch=False)
 | ------------- | ------------- | -------- |
 | batch         | `Boolean`     | No       |
 
-_Note: The batch kwarg specifies whether command is used in the batch mode. See [batch_commands method](#batch_commands) for details._
+_Note: The `batch` kwarg specifies whether command is used in the batch mode. See [batch_commands method](#batch_commands) for details._
 
 It returns a Float.
 ```python
@@ -236,7 +244,7 @@ exponea.Tracking.update_customer_properties({ "registered": "test" }, { "first_n
 
 _Note: The Customer's properties will get updated with the values of the properties Dictionary._
 
-_Note: The batch kwarg specifies whether command is used in the batch mode. See [batch_commands method](#batch_commands) for details._
+_Note: The `batch` kwarg specifies whether command is used in the batch mode. See [batch_commands method](#batch_commands) for details._
 
 It returns Boolean describing whether operation was successful or not.
 ```python
@@ -255,9 +263,9 @@ exponea.Tracking.add_event({ "registered": "test" }, "event_type", properties={ 
 | timestamp     | `Float`         | No       |
 | batch         | `Boolean`       | No       |
 
-_Note: properties and timestamp are kwargs._
+_Note: `properties`, `timestamp` and `batch` parameters are kwargs._
 
-_Note: The batch kwarg specifies whether command is used in the batch mode. See [batch_commands method](#batch_commands) for details._
+_Note: The `batch` kwarg specifies whether command is used in the batch mode. See [batch_commands method](#batch_commands) for details._
 
 It returns Boolean describing whether operation was successful or not.
 ```python
@@ -278,6 +286,7 @@ exponea.Tracking.batch_commands([
 
 See [official documentation](https://developers.exponea.com/v2/reference#section-how-to-build-a-command-body) for the available formats of different types of commands.
 It returns an Array of Booleans describing whether each operation was successful or not.
+
 ```python
 [True, True, 1533833512.6860783]
 ```
@@ -323,6 +332,7 @@ exponea.Customer.get_customer_consents({"registered": "test"}, [ "newsletter", "
 | consent_types | `Array<String>` | Yes      |
 
 It returns a Dictionary.
+
 ```python
 {
     "newsletter": True,
@@ -345,7 +355,7 @@ exponea.Customer.get_customer_attributes({"registered": "test"}, ids=["cookie", 
 | predictions   | `Array<String>` | No       |
 | expressions   | `Array<String>` | No       |
 
-_Note: The paramateres are kwargs and specify the attributes you want to recieve._
+_Note: All the arguments are kwargs and specify the attributes you want to recieve._
 
 It returns a Dictionary.
 ```python
@@ -405,7 +415,7 @@ exponea.Customer.get_events({ "registered": "test" }, [ "event_type" ])
 | customer_ids  | `Dictionary`    | Yes      |
 | event_types   | `Array<String>` | Yes      |
 
-_Note: Event type is the name of an Event._
+_Note: Elements of `event_types` Array are names of Events._
 
 It returns an Array.
 ```python
@@ -429,6 +439,7 @@ exponea.Customer.anonymize_customer({ "registered": "test" })
 | customer_ids  | `Dictionary`    | Yes      |
 
 It returns a Boolean if operation was successful or not.
+
 ```python
 True
 ```
@@ -444,6 +455,7 @@ exponea.Analyses.get_report("report_id")
 | report_id     | `String`        | Yes      |
 
 It returns a Dictionary. The elements in `data` represent individual rows.
+
 ```python
 {
     "name": "report_name",
@@ -465,6 +477,7 @@ exponea.Analyses.get_funnel("funnel_id")
 | funnel_id     | `String`        | Yes      |
 
 It returns a Dictionary. The elements in `data` represent individual drill downs.
+
 ```python
 {
     "name": "funnel_name",
@@ -488,6 +501,7 @@ exponea.Analyses.get_segmentation("segmentation_id")
 | segmentation_id | `String`        | Yes      |
 
 It returns a Dictionary. The elements in `data` represent individual segments.
+
 ```python
 {
     "name": "segmentation_name",
