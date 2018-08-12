@@ -1,11 +1,11 @@
-from Exponea import Exponea
+from src.client import Exponea
 from pytest_mock import mocker
 
 def test_get_customer(mocker, load_data, mock_request):
     exponea = Exponea("test")
     mock_exponea_response = load_data("test_customer.json")
     mocker.patch("requests.request", mock_request(mock_exponea_response))
-    customer = exponea.Customer.get_customer({ "registered": "test" })
+    customer = exponea.customer.get_customer({ "registered": "test" })
     assert customer["properties"]["first_name"] == "Lukas"
     assert customer["ids"]["registered"] == "test"
     assert customer["events"][0] == {
@@ -20,7 +20,7 @@ def test_get_customer_consents(mocker, load_data, mock_request):
     exponea = Exponea("test")
     mock_exponea_response = load_data("test_customer_consents.json")
     mocker.patch("requests.request", mock_request(mock_exponea_response))
-    consents = exponea.Customer.get_customer_consents({ "registered": "test" }, [ "newsletter" ])
+    consents = exponea.customer.get_customer_consents({ "registered": "test" }, [ "newsletter" ])
     assert consents["newsletter"] == False
 
 
@@ -28,7 +28,7 @@ def test_get_customer_attributes(mocker, load_data, mock_request):
     exponea = Exponea("test")
     mock_exponea_response = load_data("test_customer_attributes.json")
     mocker.patch("requests.request", mock_request(mock_exponea_response))
-    customer = exponea.Customer.get_customer_attributes({ "registered": "test" }, ids=["id"], segmentations=["segm"], aggregations=["aggr"], properties=["prop"])
+    customer = exponea.customer.get_customer_attributes({ "registered": "test" }, ids=["id"], segmentations=["segm"], aggregations=["aggr"], properties=["prop"])
     assert customer["properties"]["prop"] == "Lukas"
     assert customer["ids"]["id"] == ["123"]
     assert customer["aggregations"]["aggr"] == 0
@@ -38,7 +38,7 @@ def test_get_customers(mocker, load_data, mock_request):
     exponea = Exponea("test")
     mock_exponea_response = load_data("test_customers.json")
     mocker.patch("requests.request", mock_request(mock_exponea_response))
-    customers = exponea.Customer.get_customers()
+    customers = exponea.customer.get_customers()
     assert customers[0] == {
         "ids": {
             "registered": "test",
@@ -54,7 +54,7 @@ def test_get_events(mocker, load_data, mock_request):
     exponea = Exponea("test")
     mock_exponea_response = load_data("test_events.json")
     mocker.patch("requests.request", mock_request(mock_exponea_response))
-    events = exponea.Customer.get_events({ "registered": "test"}, [ "test" ])
+    events = exponea.customer.get_events({ "registered": "test"}, [ "test" ])
     assert events[0] == {
         "properties":{
             "test": "foo"
