@@ -1,12 +1,12 @@
 ## Installation
 NOT READY YET.
 ```
-pip install exponea-client
+pip install exponea-python-sdk
 ```
 
 ## Usage
 ```python
-import Exponea from exponea_client
+import Exponea from exponea_python_sdk
 exponea = Exponea("project_token", username="basic_auth_username", password="basic_auth_password")
 ```
 You can now fully utilize all four API, which are Analyses, Catalog, Customer and Tracking API described bellow.
@@ -52,7 +52,7 @@ For official Exponea documenation of Data API please see <https://developers.exp
 
 ## create_catalog
 ```python
-exponea.Catalog.create_catalog("catalog_name", ["field_one", "field_two"])
+exponea.catalog.create_catalog("catalog_name", ["field_one", "field_two"])
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -67,7 +67,7 @@ d2b69e7s987b0asa0137455f2
 
 ## get_catalog_name
 ```python
-exponea.Catalog.get_catalog_name("catalog_id")
+exponea.catalog.get_catalog_name("catalog_id")
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -81,7 +81,7 @@ test_catalog
 
 ## get_catalog_items
 ```python
-exponea.Catalog.get_catalog_items("catalog_id", params={})
+exponea.catalog.get_catalog_items("catalog_id", params={})
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -105,7 +105,7 @@ It returns items of the catalog that match the query and filters specified in pa
 
 ## update_catalog_item
 ```python
-exponea.Catalog.update_catalog_item("catalog_id", "1", {"field_one": "new_value"})
+exponea.catalog.update_catalog_item("catalog_id", "1", {"field_one": "new_value"})
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -121,7 +121,7 @@ True
 
 ## update_catalog_name
 ```python
-exponea.Catalog.update_catalog_name("catalog_id", "new_name", ["fiel_one", "field_two", "field_three"])
+exponea.catalog.update_catalog_name("catalog_id", "new_name", ["fiel_one", "field_two", "field_three"])
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -139,7 +139,7 @@ True
 
 ## create_catalog_item
 ```python
-exponea.Catalog.create_catalog_item("catalog_id", "item_id", { "field_one": "value_one" })
+exponea.catalog.create_catalog_item("catalog_id", "item_id", { "field_one": "value_one" })
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -156,7 +156,7 @@ True
 
 ## update_catalog_item
 ```python
-exponea.Catalog.update_catalog_item("catalog_id", "item_id", { "field_one": "value_one" })
+exponea.catalog.update_catalog_item("catalog_id", "item_id", { "field_one": "value_one" })
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -174,7 +174,7 @@ True
 
 ## delete_catalog_item
 ```python
-exponea.Catalog.delete_catalog_item("catalog_id", "item_id")
+exponea.catalog.delete_catalog_item("catalog_id", "item_id")
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -189,7 +189,7 @@ True
 
 ## delete_catalog_items
 ```python
-exponea.Catalog.delete_catalog_items("catalog_id")
+exponea.catalog.delete_catalog_items("catalog_id")
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -203,7 +203,7 @@ True
 
 ## delete_catalog
 ```python
-exponea.Catalog.delete_catalog("catalog_id")
+exponea.catalog.delete_catalog("catalog_id")
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -219,7 +219,7 @@ True
 
 ### get_system_time
 ```python
-exponea.Tracking.get_system_time(batch=False)
+exponea.tracking.get_system_time(batch=False)
 ```
 | Parameter     | Type          | Required |
 | ------------- | ------------- | -------- |
@@ -234,7 +234,7 @@ It returns a Float.
 
 ### update_customer_properties
 ```python
-exponea.Tracking.update_customer_properties({ "registered": "test" }, { "first_name": "Lukas" }, batch=False)
+exponea.tracking.update_customer_properties({ "registered": "test" }, { "first_name": "Lukas" }, batch=False)
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -253,7 +253,7 @@ True
 
 ### add_event
 ```python
-exponea.Tracking.add_event({ "registered": "test" }, "event_type", properties={ "property": "sample_property" }, timestamp=1533663283, batch=False)
+exponea.tracking.add_event({ "registered": "test" }, "event_type", properties={ "property": "sample_property" }, timestamp=1533663283, batch=False)
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -274,10 +274,10 @@ True
 
 ### batch_commands
 ```python
-exponea.Tracking.batch_commands([
-    exponea.Tracking.add_event({ "registered": "test" }, "event_type", properties={ "property": "test" }, batch=True),
-    exponea.Tracking.update_customer_properties({ "registered": "test" }, { "first_name": "Lukas" }, batch=True),
-    exponea.Tracking.get_system_time(batch=True)
+exponea.tracking.batch_commands([
+    exponea.tracking.add_event({ "registered": "test" }, "event_type", properties={ "property": "test" }, batch=True),
+    exponea.tracking.update_customer_properties({ "registered": "test" }, { "first_name": "Lukas" }, batch=True),
+    exponea.tracking.get_system_time(batch=True)
 ])
 ```
 | Parameter     | Type                | Required |
@@ -295,7 +295,7 @@ It returns an Array of Booleans describing whether each operation was successful
 
 ### get_customer
 ```python
-exponea.Customer.get_customer({ "registered": "test", "cookie": "123" })
+exponea.customer.get_customer({ "registered": "test", "cookie": "123" })
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -324,7 +324,7 @@ It returns a Dictionary.
 
 ### get_customer_consents
 ```python
-exponea.Customer.get_customer_consents({"registered": "test"}, [ "newsletter", "other" ])
+exponea.customer.get_customer_consents({"registered": "test"}, [ "newsletter", "other" ])
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -342,7 +342,7 @@ It returns a Dictionary.
 
 ### get_customer_attributes
 ```python
-exponea.Customer.get_customer_attributes({"registered": "test"}, ids=["cookie", "ga"], properties=["first_name"], aggregations=["agg_id"], segmentations=["segm_id"], predictions=["pred_id"], expressions=["expr_id"])
+exponea.customer.get_customer_attributes({"registered": "test"}, ids=["cookie", "ga"], properties=["first_name"], aggregations=["agg_id"], segmentations=["segm_id"], predictions=["pred_id"], expressions=["expr_id"])
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -385,7 +385,7 @@ _Note: If you do not specify one of the attribute types, it will not have a key 
 
 ### get_customers
 ```python
-exponea.Customer.get_customers()
+exponea.customer.get_customers()
 ```
 | Parameter     | Type          | Required |
 | ------------- | ------------- | -------- |
@@ -408,7 +408,7 @@ It returns an Array.
 
 ### get_events
 ```python
-exponea.Customer.get_events({ "registered": "test" }, [ "event_type" ])
+exponea.customer.get_events({ "registered": "test" }, [ "event_type" ])
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -432,7 +432,7 @@ It returns an Array.
 
 ### anonymize_customer
 ```python
-exponea.Customer.anonymize_customer({ "registered": "test" })
+exponea.customer.anonymize_customer({ "registered": "test" })
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -448,7 +448,7 @@ True
 
 ### get_report
 ```python
-exponea.Analyses.get_report("report_id")
+exponea.analyses.get_report("report_id")
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -470,7 +470,7 @@ It returns a Dictionary. The elements in `data` represent individual rows.
 
 ### get_funnel
 ```python
-exponea.Analyses.get_funnel("funnel_id")
+exponea.analyses.get_funnel("funnel_id")
 ```
 | Parameter     | Type            | Required |
 | ------------- | -------------   | -------- |
@@ -494,7 +494,7 @@ It returns a Dictionary. The elements in `data` represent individual drill downs
 
 ### get_segmentation
 ```python
-exponea.Analyses.get_segmentation("segmentation_id")
+exponea.analyses.get_segmentation("segmentation_id")
 ```
 | Parameter     | Type              | Required |
 | ------------- | -------------     | -------- |
