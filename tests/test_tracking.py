@@ -1,4 +1,4 @@
-from src.client import Exponea
+from exponea_python_sdk.client import Exponea
 from pytest_mock import mocker
 
 def test_get_system_time(mocker, load_data, mock_request):

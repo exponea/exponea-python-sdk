@@ -1,4 +1,4 @@
-from src.client import Exponea
+from exponea_python_sdk.client import Exponea
 from pytest_mock import mocker
 
 def test_create_catalog(mocker, load_data, mock_request):

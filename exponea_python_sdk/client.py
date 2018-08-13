@@ -1,9 +1,9 @@
 from requests.auth import HTTPBasicAuth
-from src.exceptions import APIException
-from src.analyses import Analyses
-from src.customer import Customer
-from src.tracking import Tracking
-from src.catalog import Catalog
+from exponea_python_sdk.exceptions import APIException
+from exponea_python_sdk.analyses import Analyses
+from exponea_python_sdk.customer import Customer
+from exponea_python_sdk.tracking import Tracking
+from exponea_python_sdk.catalog import Catalog
 import requests
 import logging
 import json
