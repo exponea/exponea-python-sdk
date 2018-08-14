@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="exponea-python-sdk",
-    version="0.1.2",
+    version="0.1.3",
     author="Lukas Cerny",
     author_email="lukas.cerny@exponea.com",
     description="A Python client for Exponea Data API",

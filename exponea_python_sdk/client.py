@@ -43,7 +43,12 @@ class Exponea:
         if status == 200 and result["success"]:
             return result
         self.logger.error(response.text)
-        if result["errors"].get("_global"):
-            raise APIException(result["errors"]["_global"])
-        else:
-            raise APIException(result["errors"]["message"])
+        if result.get("error") is not None:
+            raise APIException(result["error"])
+        elif result.get("errors"):
+            errors = result.get("errors")
+            if type(errors) == list:
+                raise APIException(result["errors"])
+            elif type(errors) == dict:
+                raise APIException(list(result["errors"].values()))
+        raise APIException(response.text)
