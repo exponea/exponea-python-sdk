@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="exponea-python-sdk",
-    version="0.1.1",
+    version="0.1.2",
     author="Lukas Cerny",
     author_email="lukas.cerny@exponea.com",
     description="A Python client for Exponea Data API",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/lukasotocerny/exponea-python-client",
+    url="https://github.com/exponea/exponea-python-sdk",
     packages=setuptools.find_packages(),
     classifiers=(
         "Programming Language :: Python :: 3",

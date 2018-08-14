@@ -1,12 +1,11 @@
 ## Installation
-NOT READY YET.
 ```
 pip install exponea-python-sdk
 ```
 
 ## Usage
 ```python
-import Exponea from exponea_python_sdk
+from exponea_python_sdk import Exponea 
 exponea = Exponea("project_token", username="basic_auth_username", password="basic_auth_password")
 ```
 You can now fully utilize all four API, which are Analyses, Catalog, Customer and Tracking API described bellow.

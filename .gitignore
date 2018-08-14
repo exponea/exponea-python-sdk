@@ -2,3 +2,6 @@ env
 __pycache__
 .pytest_cache
 test.py
+build
+dist
+exponea_python_sdk.egg-info
