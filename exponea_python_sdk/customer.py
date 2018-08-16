@@ -1,6 +1,7 @@
 class Customer:
     def __init__(self, client):
         self.client = client
+        self.logger = client.logger
         self.endpoint_base = "/data/v2/projects/{}/customers".format(client.project_token)
     
     def get_customer(self, ids):
@@ -25,7 +26,7 @@ class Customer:
         for index, consent_type in enumerate(consents):
             # Check if user has permission to request data_type
             if not response["results"][index]["success"]:
-                logger.warning("No permission to retrieve consent {}".format(consent_type))
+                self.logger.warning("No permission to retrieve consent {}".format(consent_type))
                 result[consent_type] = None
                 continue
             result[consent_type] = response["results"][index]["value"]
@@ -57,7 +58,7 @@ class Customer:
             for id in attribute_type_ids:
                 # Check if user has permission to request attribute_type
                 if not response["results"][attributes_retrieved]["success"]:
-                    logger.warning("No permission to retrieve {} {}".format(attribute_type_name, id))
+                    self.logger.warning("No permission to retrieve {} {}".format(attribute_type_name, id))
                     result[attribute_type_name][id] = None
                     continue
                 result[attribute_type_name][id] = response["results"][attributes_retrieved]["value"]
