@@ -60,6 +60,7 @@ class Customer:
                 if not response["results"][attributes_retrieved]["success"]:
                     self.logger.warning("No permission to retrieve {} {}".format(attribute_type_name, id))
                     result[attribute_type_name][id] = None
+                    attributes_retrieved += 1
                     continue
                 result[attribute_type_name][id] = response["results"][attributes_retrieved]["value"]
                 attributes_retrieved += 1
