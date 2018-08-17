@@ -16,6 +16,12 @@ To run tests, run the following command
 python -m pytest
 ```
 
+## Logging
+To configure logging, use the attribute `exponea.logger` where a standard logger from Python `logging` module is initalized. For example, to enable `DEBUG` messages, you can configure
+```python
+exponea.logger.setLevel("DEBUG")
+```
+
 ## Official documenation
 For official Exponea documenation of Data API please see <https://developers.exponea.com/v2/reference>
 

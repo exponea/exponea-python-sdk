@@ -8,15 +8,18 @@ import requests
 import logging
 import json
 
-URL_DEFAULT = "https://api.exponea.com/"
+DEFAULT_URL = "https://api.exponea.com"
+
+logging.basicConfig()
+DEFAULT_LOGGER = logging.getLogger("exponea-python-sdk")
 
 class Exponea:
-    def __init__(self, project_token, username="", password="", url=None, logger=None):
+    def __init__(self, project_token, username="", password="", url=None):
         self.project_token = project_token
         self.username = username
         self.password = password
-        self.url = url or URL_DEFAULT
-        self.logger = logger or logging.getLogger("client")
+        self.url = url or DEFAULT_URL
+        self.logger = DEFAULT_LOGGER
         self.analyses = Analyses(self)
         self.catalog = Catalog(self)
         self.customer = Customer(self)
@@ -37,8 +40,10 @@ class Exponea:
     
     def request(self, request_type, path, payload=None):
         url = self.url + path
+        self.logger.debug("Sending {} request to {}".format(request_type, url))
         response = requests.request(request_type, url, json=payload, auth=HTTPBasicAuth(self.username, self.password))
         status = response.status_code
+        self.logger.debug("Response status code {}".format(status))
         result = json.loads(response.text)
         if status == 200 and result["success"]:
             return result
