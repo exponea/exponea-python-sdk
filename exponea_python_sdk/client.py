@@ -1,12 +1,14 @@
-from requests.auth import HTTPBasicAuth
-from exponea_python_sdk.exceptions import APIException
-from exponea_python_sdk.analyses import Analyses
-from exponea_python_sdk.customer import Customer
-from exponea_python_sdk.tracking import Tracking
-from exponea_python_sdk.catalog import Catalog
-import requests
-import logging
 import json
+import logging
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+from exponea_python_sdk.analyses import Analyses
+from exponea_python_sdk.catalog import Catalog
+from exponea_python_sdk.customer import Customer
+from exponea_python_sdk.exceptions import APIException
+from exponea_python_sdk.tracking import Tracking
 
 DEFAULT_URL = 'https://api.exponea.com'
 
@@ -35,11 +37,12 @@ class Exponea:
             self.password = password
         if url is not None:
             self.url = url
+        return self
 
-    def request(self, request_type, path, payload=None):
+    def request(self, method, path, payload=None):
         url = self.url + path
-        self.logger.debug('Sending %s request to %s', request_type, url)
-        response = requests.request(request_type, url, json=payload, auth=HTTPBasicAuth(self.username, self.password))
+        self.logger.debug('Sending %s request to %s', method, url)
+        response = requests.request(method, url, json=payload, auth=HTTPBasicAuth(self.username, self.password))
         status = response.status_code
         self.logger.debug('Response status code: %d', status)
         result = json.loads(response.text)
@@ -55,3 +58,15 @@ class Exponea:
             elif type(errors) == dict:
                 raise APIException(list(result['errors'].values()))
         raise APIException(response.text)
+
+    def get(self, path):
+        return self.request('GET', path)
+
+    def post(self, path, payload=None):
+        return self.request('POST', path, payload)
+
+    def delete(self, path, payload=None):
+        return self.request('DELETE', path, payload)
+
+    def put(self, path, payload=None):
+        return self.request('PUT', path, payload)

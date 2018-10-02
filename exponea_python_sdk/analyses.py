@@ -16,12 +16,12 @@ class Analyses:
         self.client = client
         self.endpoint_base = '/data/v2/projects/{}/analyses'.format(client.project_token)
 
-    # Generic method for getting any type of Analyses
     def get_analysis(self, analysis_type, analysis_id):
+        """Generic method for getting any type of analyses"""
         assert analysis_type in ANALYSIS_TYPES, 'Unknown analysis type "{}"'.format(analysis_type)
         path = '{}/{}'.format(self.endpoint_base, analysis_type)
         payload = {'analysis_id': analysis_id, 'format': 'table_json'}
-        response = self.client.request("POST", path, payload)
+        response = self.client.post(path, payload)
         # In case analysis is not found
         if response is None:
             return None

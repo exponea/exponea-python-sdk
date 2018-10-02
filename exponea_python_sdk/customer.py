@@ -7,7 +7,7 @@ class Customer:
     def get_customer(self, ids):
         path = '{}/export-one'.format(self.endpoint_base)
         payload = {'customer_ids': ids}
-        response = self.client.request('POST', path, payload)
+        response = self.client.post(path, payload)
         if response is None:
             return None
         return {
@@ -20,7 +20,7 @@ class Customer:
         path = '{}/attributes'.format(self.endpoint_base)
         payload = {'customer_ids': ids,
                    'attributes': [{'type': 'consent', 'category': consent_type} for consent_type in consents]}
-        response = self.client.request('POST', path, payload)
+        response = self.client.post(path, payload)
         if response is None:
             return None
         result = {}
@@ -46,7 +46,7 @@ class Customer:
                 [{'type': 'aggregate', 'id': aggregate} for aggregate in aggregations] +
                 [{'type': 'prediction', 'id': prediction} for prediction in predictions]
         }
-        response = self.client.request('POST', path, payload)
+        response = self.client.post(path, payload)
         if response is None:
             return None
         result = {}
@@ -73,7 +73,7 @@ class Customer:
     def get_customers(self):
         path = '{}/export'.format(self.endpoint_base)
         payload = {'format': 'native_json'}
-        response = self.client.request('POST', path, payload)
+        response = self.client.post(path, payload)
         if response is None:
             return None
         users = []
@@ -92,11 +92,11 @@ class Customer:
     def get_events(self, customer_ids, event_types):
         path = '{}/events'.format(self.endpoint_base)
         payload = {'customer_ids': customer_ids, 'event_types': event_types}
-        response = self.client.request('POST', path, payload)
+        response = self.client.post(path, payload)
         return None if response is None else response['data']
 
     def anonymize_customer(self, customer_ids):
         path = '{}/anonymize'.format(self.endpoint_base)
         payload = {'customer_ids': customer_ids}
-        response = self.client.request('POST', path, payload)
+        response = self.client.post(path, payload)
         return None if response is None else response['success']

@@ -7,7 +7,7 @@ class Tracking:
         if batch:
             return {'name': 'system/time'}
         path = '{}/system/time'.format(self.endpoint_base)
-        response = self.client.request('GET', path)
+        response = self.client.get(path)
         return None if response is None else response['time']
 
     def update_customer_properties(self, customer_ids, properties, batch=False):
@@ -15,7 +15,7 @@ class Tracking:
             return {'name': 'customers', 'data': {'customer_ids': customer_ids, 'properties': properties}}
         path = '{}/customers'.format(self.endpoint_base)
         payload = {'customer_ids': customer_ids, 'properties': properties}
-        response = self.client.request('POST', path, payload)
+        response = self.client.post(path, payload)
         return None if response is None else response['success']
 
     def add_event(self, customer_ids, event_type, properties=None, timestamp=None, batch=False):
@@ -24,13 +24,13 @@ class Tracking:
         if batch:
             return {'name': 'customers/events', 'data': payload}
         path = '{}/customers/events'.format(self.endpoint_base)
-        response = self.client.request('POST', path, payload)
+        response = self.client.post(path, payload)
         return None if response is None else response['success']
 
     def batch_commands(self, commands):
         path = '{}/batch'.format(self.endpoint_base)
         payload = {'commands': commands}
-        response = self.client.request('POST', path, payload)
+        response = self.client.post(path, payload)
         if response is None:
             return None
         result = []
