@@ -1,3 +1,16 @@
+class AnalysisType:
+    FUNNEL = 'funnel'
+    REPORT = 'report'
+    SEGMENTATION = 'segmentation'
+
+
+ANALYSIS_TYPES = {
+    AnalysisType.FUNNEL,
+    AnalysisType.REPORT,
+    AnalysisType.SEGMENTATION,
+}
+
+
 class Analyses:
     def __init__(self, client):
         self.client = client
@@ -5,8 +18,8 @@ class Analyses:
 
     # Generic method for getting any type of Analyses
     def get_analysis(self, analysis_type, analysis_id):
-        # Construct request
-        path = self.endpoint_base + '/' + analysis_type
+        assert analysis_type in ANALYSIS_TYPES, 'Unknown analysis type "{}"'.format(analysis_type)
+        path = '{}/{}'.format(self.endpoint_base, analysis_type)
         payload = {'analysis_id': analysis_id, 'format': 'table_json'}
         response = self.client.request("POST", path, payload)
         # In case analysis is not found
@@ -22,10 +35,10 @@ class Analyses:
         return result
 
     def get_funnel(self, funnel_id):
-        return self.get_analysis('funnel', funnel_id)
+        return self.get_analysis(AnalysisType.FUNNEL, funnel_id)
 
     def get_report(self, report_id):
-        return self.get_analysis('report', report_id)
+        return self.get_analysis(AnalysisType.REPORT, report_id)
 
     def get_segmentation(self, segmentation_id):
-        return self.get_analysis('segmentation', segmentation_id)
+        return self.get_analysis(AnalysisType.SEGMENTATION, segmentation_id)

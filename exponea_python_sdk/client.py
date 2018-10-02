@@ -36,9 +36,6 @@ class Exponea:
         if url is not None:
             self.url = url
 
-    def _process_response_exceptions(self, response):
-        pass
-
     def request(self, request_type, path, payload=None):
         url = self.url + path
         self.logger.debug('Sending %s request to %s', request_type, url)
