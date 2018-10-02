@@ -1,3 +1,7 @@
+# Exponea Python SDK
+
+An official Python client for Exponea Data API
+
 ## Installation
 ```
 pip install exponea-python-sdk
@@ -5,7 +9,7 @@ pip install exponea-python-sdk
 
 ## Usage
 ```python
-from exponea_python_sdk import Exponea 
+from exponea_python_sdk import Exponea
 exponea = Exponea("project_token", username="basic_auth_username", password="basic_auth_password")
 ```
 You can now fully utilize all four API, which are Analyses, Catalog, Customer and Tracking API described bellow.
@@ -102,7 +106,7 @@ It returns items of the catalog that match the query and filters specified in pa
     "matched": 2,
     "limit": 20,
     "skip": 0,
-    "data": [{"item_id": "1", "properties": {"field_one": "foo", "field_two": "baz"}}], 
+    "data": [{"item_id": "1", "properties": {"field_one": "foo", "field_two": "baz"}}],
     "matched_limited": False,
     "total": 2
 }
@@ -315,7 +319,7 @@ It returns a Dictionary.
         "type": "test",
         "timestamp": 1533495544.343536,
         "properties": {}
-    }], 
+    }],
     "properties": {
         "first_name": "Lukas",
         "last_nam": "Cerny"
@@ -400,7 +404,7 @@ It returns an Array.
 [
     {
         "ids": {
-            "cookie": [], 
+            "cookie": [],
             "registered": "test"
         },
         "properties": {
