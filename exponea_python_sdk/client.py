@@ -45,7 +45,11 @@ class Exponea:
         response = requests.request(method, url, json=payload, auth=HTTPBasicAuth(self.username, self.password))
         status = response.status_code
         self.logger.debug('Response status code: %d', status)
-        result = json.loads(response.text)
+        try:
+            result = json.loads(response.text)
+        except JSONDecodeError:
+            self.logger.error(response.text)
+            raise APIException(response.text)
         if status == 200 and result['success']:
             return result
         self.logger.error(response.text)
