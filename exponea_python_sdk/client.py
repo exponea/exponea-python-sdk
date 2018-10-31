@@ -47,7 +47,7 @@ class Exponea:
         self.logger.debug('Response status code: %d', status)
         try:
             result = json.loads(response.text)
-        except JSONDecodeError:
+        except Exception:
             self.logger.error(response.text)
             raise APIException(response.text)
         if status == 200 and result['success']:
