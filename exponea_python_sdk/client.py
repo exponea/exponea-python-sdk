@@ -17,11 +17,12 @@ DEFAULT_LOGGER = logging.getLogger('exponea-python-sdk')
 
 
 class Exponea:
-    def __init__(self, project_token, username='', password='', url=None):
+    def __init__(self, project_token, username='', password='', url=None, req_timeout=10):
         self.project_token = project_token
         self.username = username
         self.password = password
         self.url = url or DEFAULT_URL
+        self.req_timeout = req_timeout
         self.logger = DEFAULT_LOGGER
         self.analyses = Analyses(self)
         self.catalog = Catalog(self)
@@ -42,7 +43,18 @@ class Exponea:
     def request(self, method, path, payload=None):
         url = self.url + path
         self.logger.debug('Sending %s request to %s', method, url)
-        response = requests.request(method, url, json=payload, auth=HTTPBasicAuth(self.username, self.password))
+        try:
+            response = requests.request(
+                method, 
+                url, 
+                json=payload, 
+                auth=HTTPBasicAuth(self.username, self.password), 
+                timeout=self.req_timeout
+            )
+        except requests.Timeout:
+            err_msg = 'Requests timeout after %s', self.req_timeout
+            self.logger.error(err_msg)
+            raise APIException(err_msg)
         status = response.status_code
         self.logger.debug('Response status code: %d', status)
         try:
