@@ -11,24 +11,26 @@ from exponea_python_sdk.exceptions import APIException
 from exponea_python_sdk.tracking import Tracking
 
 DEFAULT_URL = 'https://api.exponea.com'
+DEFAULT_TIMEOUT = 10
 
 logging.basicConfig()
 DEFAULT_LOGGER = logging.getLogger('exponea-python-sdk')
 
 
 class Exponea:
-    def __init__(self, project_token, username='', password='', url=None):
+    def __init__(self, project_token, username='', password='', url=None, request_timeout=None):
         self.project_token = project_token
         self.username = username
         self.password = password
         self.url = url or DEFAULT_URL
+        self.request_timeout = request_timeout or DEFAULT_TIMEOUT
         self.logger = DEFAULT_LOGGER
         self.analyses = Analyses(self)
         self.catalog = Catalog(self)
         self.customer = Customer(self)
         self.tracking = Tracking(self)
 
-    def configure(self, project_token=None, username=None, password=None, url=None):
+    def configure(self, project_token=None, username=None, password=None, url=None, request_timeout=None):
         if project_token is not None:
             self.project_token = project_token
         if username is not None:
@@ -37,12 +39,20 @@ class Exponea:
             self.password = password
         if url is not None:
             self.url = url
+        if request_timeout is not None:
+            self.request_timeout = request_timeout
         return self
 
     def request(self, method, path, payload=None):
         url = self.url + path
         self.logger.debug('Sending %s request to %s', method, url)
-        response = requests.request(method, url, json=payload, auth=HTTPBasicAuth(self.username, self.password))
+        try:
+            response = requests.request(method, url, json=payload, auth=HTTPBasicAuth(self.username, self.password),
+                                        timeout=self.request_timeout)
+        except requests.Timeout:
+            msg = 'Request timeout after {} seconds.'.format(self.request_timeout)
+            self.logger.error(msg)
+            raise APIException(msg)
         status = response.status_code
         self.logger.debug('Response status code: %d', status)
         try:
