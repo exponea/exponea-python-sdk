@@ -1,3 +1,12 @@
+
+---
+
+# ⚠️ This SDK has been deprecated and is no longer maintained.
+
+Please consult the [official API reference](https://documentation.bloomreach.com/engagement/reference) for how to interact with the API.
+
+---
+
 # Exponea Python SDK
 
 An official Python client for Exponea Data API
